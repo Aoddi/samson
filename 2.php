@@ -84,7 +84,7 @@ function convertString(string $a, string $b): string
     $stringLowerCase = mb_strtolower($b);
     $counter = 0;
 
-    foreach($arr as $key => $word) {
+    foreach ($arr as $key => $word) {
         $wordLowerCase = mb_strtolower($word);
         $wordTrim = trim($wordLowerCase, "\x20..\x2F\x3A..\x3F");
 
@@ -102,7 +102,32 @@ function convertString(string $a, string $b): string
 
 // var_dump(convertString('меня зовут Меня Артём. У Меня есть кошка, а также у меня есть Пёс', 'меня'));
 
+/**
+ * Функция сортирует массив по возрастанию значния $b
+ * @param array $a входной массив
+ * @param string $b ключ
+ * @return array 
+ */
+function mySortForKey(array $a, string $b): array
+{
+    foreach ($a as $key => $arr) {
+        if (!$arr[$b]) {
+            throw new Exception('Нет ключа "' .  $b . '" в массиве с индексом - ' . $key);
+        }
+    }
 
+    usort($a, function ($c, $d) use ($b) {
+        return $c[$b] <=> $d[$b];
+    });
+
+    return $a;
+}
+
+try {
+    // var_dump(mySortForKey([['a' => 2, 'b' => 1], ['d' => 1, 'b' => 3], ['d' => 9, 'b' => 3], ['a' => 4, 'a' => 6], ['a' => 7, 'b' => 2], ['a' => 0, 'b' => 1]], 'b'));
+} catch (Exception $e) {
+    echo $e -> getMessage();
+}
 
 ?>
 </pre>
