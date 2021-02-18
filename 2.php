@@ -1,4 +1,3 @@
-<pre>
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/samson/dbConnect.php');
 
@@ -61,7 +60,11 @@ try {
 
 // Реализовать функцию importXml($a). $a – путь к xml файлу (структура файла приведена ниже). Результат ее выполнения: прочитать файл $a и импортировать его в созданную БД.
 
-function importXml($a)
+/**
+ * Функция для чтения xml файла и отправки данных в БД
+ * @param string $a путь к файлу
+ */
+function importXml(string $a)
 {
     if (file_exists($a)) {
         $str = file_get_contents($a);
@@ -118,5 +121,3 @@ try {
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-?>
-</pre>
